@@ -2,6 +2,7 @@ use clap::{Parser, Subcommand};
 
 mod prover;
 mod verifier;
+mod util;
 
 #[derive(Parser)]
 struct Cli {

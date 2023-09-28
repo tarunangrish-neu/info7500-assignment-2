@@ -1,6 +1,5 @@
 use std::collections::VecDeque;
 use std::fs;
-use std::hash::Hash;
 use serde::{Deserialize, Serialize};
 use crate::util;
 use crate::util::{decode_hash, Hash32Bytes, hash_internal};
@@ -33,9 +32,6 @@ fn read_merkle_proof(proof_file: &String) -> Box<MerkleProof> {
         decoded_hash.push(decode_hash(hash_base64));
     }
     merkle_proof.proof_hash_values = Some(decoded_hash);
-
-
-    println!("{:?}", merkle_proof);
     merkle_proof
 }
 

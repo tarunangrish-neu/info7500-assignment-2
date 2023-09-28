@@ -1,39 +1,13 @@
 use std::collections::VecDeque;
-use std::fs;
-use serde::{Deserialize, Serialize};
 use crate::util;
-use crate::util::{decode_hash, Hash32Bytes, hash_internal};
+use crate::util::{decode_hash,read_merkle_proof,MerkleProof, hash_internal};
 
-#[derive(Serialize, Deserialize, Debug)]
-struct MerkleProof {
-    leaf_position: u64,
-    leaf_value: String,
-    proof_hash_values_base64: Vec<String>,
-    proof_hash_values: Option<Vec<Hash32Bytes>>
-}
 
 pub fn run(proof_file: &String) {
     let merkle_proof = read_merkle_proof(proof_file);
     verify_merkle_proof(merkle_proof)
 }
 
-fn read_merkle_proof(proof_file: &String) -> Box<MerkleProof> {
-    let contents = fs::read_to_string(proof_file)
-        .expect("Something went wrong reading the file");
-
-    // Deserialize the YAML content into a Config struct
-    let mut merkle_proof: Box<MerkleProof> = serde_yaml::from_str(&contents)
-        .expect("Error parsing the YAML file");
-
-    assert!(merkle_proof.proof_hash_values.is_none());
-
-    let mut decoded_hash = Vec::new();
-    for hash_base64 in &merkle_proof.proof_hash_values_base64 {
-        decoded_hash.push(decode_hash(hash_base64));
-    }
-    merkle_proof.proof_hash_values = Some(decoded_hash);
-    merkle_proof
-}
 
 fn verify_merkle_proof(merkle_proof: Box<MerkleProof>) {
     let root = decode_hash("1qIbsvuF6FrhNjMD4p06srUye6G4FfFINDDkNfKUpTs=");

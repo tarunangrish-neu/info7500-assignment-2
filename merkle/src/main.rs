@@ -11,7 +11,7 @@ struct Cli {
 }
 #[derive(Subcommand)]
 enum Commands {
-    Prove { leaf_pos: u64 },
+    Prove { leaf_pos: usize },
     Verify { proof_file: String },
 }
 
@@ -20,7 +20,7 @@ fn main() {
 
     match &cli.command {
         Commands::Prove { leaf_pos } => {
-            prover::run(leaf_pos);
+            prover::run(*leaf_pos);
         }
         Commands::Verify { proof_file } => {
             verifier::run(proof_file)

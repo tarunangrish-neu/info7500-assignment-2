@@ -9,6 +9,12 @@ fn gen_leaves_for_merkle_tree(num_leaves: usize) -> Vec<String> {
 
     leaves
 }
+
+fn hexs(v: Hash32Bytes) -> String {
+    let h = hex::encode(v);
+    return h.chars().take(4).collect()
+}
+
 pub fn gen_merkle_proof(leaves: Vec<String>, leaf_pos: usize) -> Vec<Hash32Bytes> {
     let height = (leaves.len() as f64).log2().ceil() as u32;
     let padlen = (2u32.pow(height)) as usize - leaves.len();
@@ -22,11 +28,15 @@ pub fn gen_merkle_proof(leaves: Vec<String>, leaf_pos: usize) -> Vec<Hash32Bytes
         state.push(zeros);
     }
 
+    for (index, value) in state.iter().enumerate() {
+        println!("{}: {}", index, hexs(*value));
+    }
+
     // initialize a vector that will contain the hashes in the proof
     let mut hashes: Vec<Hash32Bytes> = vec![];
 
     let mut level_pos = leaf_pos;
-    for _level in 0..height {
+    for level in 0..height {
         //FILL ME IN
     }
 
@@ -34,10 +44,10 @@ pub fn gen_merkle_proof(leaves: Vec<String>, leaf_pos: usize) -> Vec<Hash32Bytes
     hashes
 }
 
-pub fn run(leaf_position: usize) {
-    const NUM_LEAVES: usize = 1000; // replace with your actual constant
+pub fn run(leaf_position: usize, num_leaves: usize) {
+    let file_name = format!("proof_gen_{}_{}.yaml", num_leaves, leaf_position);
 
-    let leaves = gen_leaves_for_merkle_tree(NUM_LEAVES);
+    let leaves = gen_leaves_for_merkle_tree(num_leaves);
     assert!(leaf_position < leaves.len());
     let leaf_value = leaves[leaf_position].clone();
     let hashes = gen_merkle_proof(leaves, leaf_position);
@@ -55,5 +65,5 @@ pub fn run(leaf_position: usize) {
         proof_hash_values: None,
     };
 
-    write_merkle_proof(&proof, "proof_gen.yaml")
+    write_merkle_proof(&proof, &file_name)
 }

@@ -12,7 +12,7 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     Prove { num_leaves: usize, leaf_pos: usize,  },
-    Verify { proof_file: String },
+    Verify { proof_file: String, hash_base64: String },
 }
 
 fn main() {
@@ -22,8 +22,8 @@ fn main() {
         Commands::Prove { leaf_pos, num_leaves } => {
             prover::run(*leaf_pos, *num_leaves);
         }
-        Commands::Verify { proof_file } => {
-            verifier::run(proof_file)
+        Commands::Verify { proof_file, hash_base64 } => {
+            verifier::run(proof_file, hash_base64)
         }
     }
 }

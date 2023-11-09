@@ -11,7 +11,7 @@
 ## Contract Implementation
 
 4. **Skeletal Code:**
-
+f
    - Utilize the provided skeletal implementation of the contract code found in the `BasicVickreyAuction.sol` file.
 
 5. **Test Cases:**

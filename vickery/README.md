@@ -1,18 +1,20 @@
 # Auction Library Assignment
 
-1. Initialize a foundry project
+Reading:
+* https://a16zcrypto.com/posts/article/how-auction-theory-informs-implementations/
 
-2. Copy the skeleton contracts in this directory into your foundry project
 
-3. Use the provided skeletal implementation of the contract code found in the `BasicVickreyAuction.sol` file.
+1. Initialize a foundry project.
 
-4. Develop comprehensive test cases to thoroughly evaluate your contract's functionalities.
+2. Copy the skeleton contract `BasicVickreyAuction.sol` in this directory into your foundry project.
 
-5. Generate a Solidity coverage report to ensure 100% line and branch coverage of your contract code. 
+3. Develop comprehensive test cases to thoroughly evaluate your contract's functionalities.
 
-6. Half of your score of the assignment will be based on the quality of your test cases. We will make random mutations to your code, and your test cases should catch these changes. For example, we remove a modifier on a function or swap the order of arguments in a call. Of course, you may assume that these changes won't introduce any compilation errors.
+4. Generate a Solidity coverage report to ensure 100% line and branch coverage of your contract code. 
 
-7. Your submission should be a zip file that contains only your smart contract files and your test files. 
+5. Half of your score of the assignment will be based on the quality of your test cases. We will make random mutations to your code, and your test cases should catch these changes. For example, we may remove a modifier on a function or swap the order of arguments in a call. Of course, you may assume that these changes won't introduce any compilation errors.
+
+6. Your submission should be a zip file that contains only your smart contract files and your test files. 
 
 ## Specification
 

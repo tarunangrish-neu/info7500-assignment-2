@@ -1,4 +1,4 @@
-# Auction Library Assignment
+# Vickery Auction
 
 Reading:
 * https://a16zcrypto.com/posts/article/how-auction-theory-informs-implementations/

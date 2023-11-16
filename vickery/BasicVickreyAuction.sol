@@ -15,7 +15,9 @@ contract VickreyAuction {
     /// @param secondHighestBid The value of the second-highest bid revealed
     ///        so far, or the reserve price if no two bids have exceeded it.
     /// @param highestBidder The bidder that placed the highest bid.
-    /// @param index Auctions selling the same asset
+    /// @param index Auctions selling the same asset (i.e. tokenContract-tokenId
+    ///        pair) share the same storage. This value is incremented for
+    ///        each new auction of a particular asset.
     struct Auction {
         address seller;
         uint32 startTime;
@@ -36,7 +38,7 @@ contract VickreyAuction {
         uint96 collateral;
     }
 
-    /// @notice A mapping storing auction index and state
+    /// @notice A mapping storing auction itemId and state
     mapping(uint256 => Auction) public auctions;
 
     /// @notice A mapping storing bid commitments and records of collateral,
